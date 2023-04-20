@@ -1,0 +1,8 @@
+# Distribution / packaging
+.Python
+
+# Environments
+.env
+Venv
+Venv/
+.vscode/
