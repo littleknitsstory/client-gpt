@@ -6,3 +6,7 @@
 Venv
 Venv/
 .vscode/
+build/
+
+client_GPT.egg-info/
+dist/
