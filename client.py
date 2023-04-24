@@ -3,16 +3,39 @@ import json
 import re
 import uuid
 import os
+from typing import Tuple
 
 
 class ClientGPT:
-    def __init__(self, api_key, model):
+    """
+    A class for interacting with the OpenAI API.
+    Attributes:
+        api_key (str): Your OpenAI API key.
+        model (str): The ID of the GPT-3 model to use.
+        conversation_id (str or None): the unique identifier of the current conversation in the OpenAI. If the value is None, a new conversation ID will be created. If a string is passed, then an existing conversation ID is used.
+        session (requests.Session): A session object for making HTTP requests.
+    Method:
+        ask(prompt, conversation_id=None, previous_convo_id=None): Sends a prompt to the OpenAI API and returns the response.
+    """
+
+    def __init__(self, api_key: str, model: str):
         self.api_key = api_key
         self.model = model
         self.conversation_id = None
         self.session = requests.Session()
 
-    def ask(self, prompt, conversation_id, previous_convo_id):
+    def ask(
+        self, prompt: str, conversation_id: str or None, previous_convo_id: str or None
+    ) -> Tuple[str, str or None, str or None]:
+        """
+        Args:
+            prompt (str): a string containing text to send to the OpenAI server.
+            conversation_id (str or None): The ID of the conversation. If None, a new conversation will be started.
+            previous_convo_id (str or None): The ID of the previous conversation. If None, a new conversation will be started.
+
+        Return:
+            Tuple[str, str or None, str or None]: A tuple containing the response text, the message ID, and the conversation ID.
+        """
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {self.api_key}",
