@@ -8,7 +8,7 @@ pip install client_gpt
 
 ## use
 
-from client_gpt import ClientGPT
+from client_gpt.client_gpt import ClientGPT
 
 api_key = "your_api_key"
 
@@ -16,6 +16,6 @@ model = "your_model_id"
 
 client = ClientGPT(api_key, model)
 
-message, conversation_id = client.ask("Hello!", None)
+response_text, message_id, conversation_id = client.ask(prompt='Hello, how are you?', conversation_id=None, previous_convo_id=None)
 
-print(message)
+print(response_text)
