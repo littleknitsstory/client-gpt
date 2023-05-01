@@ -18,6 +18,8 @@ class ClientGPT:
         ask(prompt, conversation_id=None, previous_convo_id=None): Sends a prompt to the OpenAI API and returns the response.
     """
 
+    chat_api_url = "https://api.openai.com/v1/chat/completions"
+
     def __init__(self, api_key: str, model: str):
         self.api_key = api_key
         self.model = model
@@ -57,7 +59,7 @@ class ClientGPT:
 
         try:
             response = self.session.post(
-                "https://chat.openai.com/backend-api/conversation",
+                self.chat_api_url,
                 headers=headers,
                 data=json.dumps(data),
             )
