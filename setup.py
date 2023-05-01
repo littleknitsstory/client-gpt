@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="client_GPT",
-    version="1.1.4",
+    version="1.1.5",
     author="littleknitsstory",
     description="A package for working with GPT language models.",
     url="https://github.com/littleknitsstory/client-gpt",
