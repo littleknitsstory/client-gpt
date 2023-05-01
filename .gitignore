@@ -1,0 +1,12 @@
+# Distribution / packaging
+.Python
+
+# Environments
+.env
+Venv
+Venv/
+.vscode/
+build/
+
+client_GPT.egg-info/
+dist/

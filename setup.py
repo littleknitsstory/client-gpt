@@ -1,20 +1,20 @@
-from setuptools import setup
+import setuptools
 
-setup(
-    name='client_GPT',
-    version='0.1',
-    packages=['client_api'],
+setuptools.setup(
+    name="client_GPT",
+    version="1.1.7",
+    author="littleknitsstory",
+    description="A package for working with GPT language models.",
+    url="https://github.com/littleknitsstory/client-gpt",
+    packages=setuptools.find_packages(),
     install_requires=[
-        'requests',
+        "requests",
     ],
-
     classifiers=[
-        'Development Status :: 3 - Alpha',
-        'Intended Audience :: Developers',
-        'Topic :: Software Development :: Libraries',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "Topic :: Software Development :: Libraries",
+        "Programming Language :: Python :: 3",
     ],
+    python_requires=">=3.6",
 )
