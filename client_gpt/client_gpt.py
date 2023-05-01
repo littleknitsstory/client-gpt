@@ -65,7 +65,7 @@ class ClientGPT:
             )
             if response.status_code == 200:
                 response_text = response.text.replace("data: [DONE]", "")
-                data = re.findall(r"data: (.*)", response_text)[-1]
+                data = re.findall(r"data: (.*)", response_text)
                 as_json = json.loads(data)
                 return (
                     as_json["message"]["content"]["parts"][0],
