@@ -17,8 +17,8 @@ class ClientGPT:
     Method:
         ask(prompt, conversation_id=None, previous_convo_id=None): Sends a prompt to the OpenAI API and returns the response.
     """
-
-    chat_api_url = "https://api.openai.com/v1/chat/completions"
+    
+    chat_api_url = "https://api.openai.com/v1/engines/davinci-codex/completions"
 
     def __init__(self, api_key: str, model: str):
         self.api_key = api_key
