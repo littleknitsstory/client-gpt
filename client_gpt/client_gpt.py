@@ -3,7 +3,7 @@ import json
 import re
 import uuid
 import os
-from typing import Tuple
+from typing import Tuple, Optional
 
 
 class ClientGPT:
@@ -17,7 +17,7 @@ class ClientGPT:
     Method:
         ask(prompt, conversation_id=None, previous_convo_id=None): Sends a prompt to the OpenAI API and returns the response.
     """
-    
+
     chat_api_url = "https://api.openai.com/v1/completions"
 
     def __init__(self, api_key: str, model: str):
@@ -28,7 +28,7 @@ class ClientGPT:
 
     def ask(
         self, prompt: str, conversation_id: str or None, previous_convo_id: str or None
-    ) -> Tuple[str, str or None, str or None]:
+    ) -> Optional[str]:
         """
         Args:
             prompt (str): a string containing text to send to the OpenAI server.
@@ -49,6 +49,11 @@ class ClientGPT:
         data = {
             "model": self.model,
             "prompt": prompt,
+            "max_tokens": 150,
+            "temperature": 0.3,
+            "n": 1,
+            "echo": True,
+            "stream": False,
         }
 
         if previous_convo_id is None:
@@ -64,17 +69,14 @@ class ClientGPT:
                 data=json.dumps(data),
             )
             if response.status_code == 200:
-                response_text = response.text.replace("data: [DONE]", "")
-                data = re.findall(r"data: (.*)", response_text)[-1]
-                as_json = json.loads(data)
-                print(as_json["message"]["content"]["parts"][0],
-                    as_json["message"]["id"],
-                    as_json["conversation_id"],)
-                return (
-                    as_json["message"]["content"]["parts"][0],
-                    as_json["message"]["id"],
-                    as_json["conversation_id"],
-                )
+                response_data = json.loads(response.text)
+                choices = response_data["choices"]
+                print(choices)
+                if len(choices) > 0:
+                    text = choices[0]["text"]
+                    return text
+                else:
+                    return None
             elif response.status_code == 401:
                 if os.path.exists("auth.json"):
                     os.remove("auth.json")
